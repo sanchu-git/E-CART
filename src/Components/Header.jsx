@@ -4,8 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { Badge } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { productSearch } from '../Redux/Slices/productSlice';
 function Header() {
+    const dispatch = useDispatch()
     const [wishlistCount, setWishlistCount] = useState(0)
     const [cartCount,setCartCount] = useState(0)
     const wishlist = useSelector(state => state.wishlistSlice.wishlist)
@@ -22,12 +24,15 @@ function Header() {
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <Navbar.Brand><Link to={'/'} style={{ textDecoration: 'none ' }}><i class="fa-solid fa-truck-fast me-2"></i>E Cart</Link></Navbar.Brand>
-                    <div>
-                        <Link to={'/wishlist'} style={{ textDecoration: 'none' }}><Button variant="outline-primary">
+                    <div className='d-flex'>
+                        <nav Link className='me-lg-5'>
+                            <input onChange={e=>dispatch(productSearch(e.target.value.toLowerCase()))} type="text" className='form-control' placeholder='Search Products!!!'/>
+                        </nav>
+                        <Link to={'/wishlist'} style={{ textDecoration: 'none' }}><Button className='me-3 rounded' variant="outline-primary">
                             <i class="fa-solid fa-heart me-2"></i>Wishlist <Badge className='ms-2 rounded'>{wishlistCount}</Badge></Button>{' '}</Link>
 
-                        <Link to={'/cart'}><Button variant="outline-primary">
-                            <i class="fa-solid fa-cart-shopping me-1"></i>Cart
+                        <Link className='me-3' to={'/cart'}><Button className='rounded' variant="outline-primary">
+                            <i class="fa-solid fa-cart-shopping ms-1"></i>Cart
                             <Badge className='ms-2 rounded'>{cartCount}</Badge></Button></Link>
 
 
