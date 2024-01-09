@@ -4,7 +4,6 @@ import Cart from './Pages/Cart'
 import Home from './Pages/Home'
 import Wishlist from './Pages/Wishlist'
 import View from './Pages/View'
-import Header from './Components/Header'
 import Footer from './Components/Footer'
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
 
   return (
     <>
-    <Header/>
+
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
